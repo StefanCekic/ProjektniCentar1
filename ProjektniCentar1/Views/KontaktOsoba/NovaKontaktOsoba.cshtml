@@ -1,0 +1,101 @@
+﻿@model ProjektniCentar1.ViewModels.NovaOsobaViewModel
+
+@{
+    ViewBag.Title = "NovaKontaktOsoba";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>NovaKontaktOsoba</h2>
+
+@using (Html.BeginForm("KontaktOsobaCreate", "KontaktOsoba"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>NovaOsobaViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KontaktOsoba.Ime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(o=> o.KontaktOsoba.Ime, new {@class = "form-control" })
+                @Html.ValidationMessageFor(a => a.KontaktOsoba.Ime)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KontaktOsoba.Prezime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class=" col-md-10">
+                @Html.TextBoxFor(o=> o.KontaktOsoba.Prezime, new {@class = "form-control" })
+                @Html.ValidationMessageFor(a => a.KontaktOsoba.Prezime)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KontaktOsoba.RadnoMesto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(o=> o.KontaktOsoba.RadnoMesto, new {@class = "form-control" })
+                @Html.ValidationMessageFor(a => a.KontaktOsoba.RadnoMesto)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.KontaktOsoba.Preduzece.NazivPreduzeca, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(o => o.KontaktOsoba.PreduzeceId, new SelectList(Model.Preduzeca, "Id", "NazivPreduzeca"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ListaMailAdresa.MailAdresa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(o=> o.ListaMailAdresa.MailAdresa , new { @class = "form-control" })
+                @Html.ValidationMessageFor(o => o.ListaMailAdresa.MailAdresa)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ListaMailAdresa.OznakaMailAdrese, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class=" col-md-10">
+                @Html.DropDownListFor(o => o.ListaMailAdresa.OznakaMailAdreseId, new SelectList(Model.OznakeMaila, "Id", "Naziv"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ListaTelefona.BrojTelefona, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(o => o.ListaTelefona.BrojTelefona, new { @class = "form-control" })
+                @Html.ValidationMessageFor(o => o.ListaTelefona.BrojTelefona)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ListaTelefona.OznakaTelefon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(o => o.ListaTelefona.OznakaTelefonId, new SelectList(Model.OznakeTelefona, "Id", "Naziv"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ListaTelefona.Lokal, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(o => o.ListaTelefona.Lokal, new { @class = "form-control" })
+                @Html.ValidationMessageFor(o => o.ListaTelefona.Lokal)
+            </div>
+        </div>
+
+        @Html.HiddenFor(m => m.KontaktOsoba.Id)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

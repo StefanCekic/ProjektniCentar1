@@ -1,0 +1,115 @@
+﻿@model ProjektniCentar1.ViewModels.OsobeViewModel
+
+@{
+    ViewBag.Title = "Detalji";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <h4>KontaktOsoba</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Preduzeca)
+        </dt>
+        @foreach (var osoba in Model.Preduzeca)
+        {
+            <dd>
+                @osoba.NazivPreduzeca
+            </dd>}
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Osoba.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Osoba.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Osoba.Prezime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Osoba.Prezime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Osoba.RadnoMesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Osoba.RadnoMesto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ListaTelefona)
+        </dt>
+        @foreach (var telefon in Model.ListaTelefona)
+        {
+            <dd>
+                @telefon.BrojTelefona
+            </dd>
+            <dt>Lokal:</dt>
+            <dd>
+                @telefon.Lokal
+            </dd>}
+        <dt>
+            @Html.DisplayNameFor(model => model.OznakeTelefona)
+        </dt>
+        @foreach (var oznakat in Model.OznakeTelefona)
+        {
+            <dd>
+                @oznakat.Naziv
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.ListaMailAdresa)
+        </dt>
+        @foreach (var mail in Model.ListaMailAdresa)
+        {
+            <dd>
+                @mail.MailAdresa
+              
+            </dd>}
+        <dt>
+            @Html.DisplayNameFor(model => model.OznakeMailAdresa)
+        </dt>
+        @foreach (var oznaka in Model.OznakeMailAdresa)
+        {
+            <dd>
+                @oznaka.Naziv
+
+            </dd>
+        }
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("Editor") || User.IsInRole("Admin"))
+
+    {
+
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Osoba.Id })
+
+    }
+    
+   | @Html.ActionLink("Back to List", "Index")
+</p>
+<input id="dugmezastampu" type="button" value="Stampaj" onclick="printpage()" class="btn btn-default" />
+
+<script type="text/javascript">
+
+    function printpage() {
+
+        var printButton = document.getElementById("dugmezastampu");
+
+        printButton.style.visibility = 'hidden';
+
+        window.print()
+
+        printButton.style.visibility = 'visible';
+
+    }
+</script>

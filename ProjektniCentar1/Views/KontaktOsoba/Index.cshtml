@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ProjektniCentar1.Models.KontaktOsoba>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista Kontakt Osoba</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Naziv Preduzeca</th>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Radno Mesto</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var osoba in Model)
+        {
+            <tr>
+                    <td>@osoba.Preduzece.NazivPreduzeca</td>
+                    <td>@Html.ActionLink(osoba.Ime, "Detalji", new { id = osoba.Id , preduzeceid=osoba.PreduzeceId}, null)</td>
+                    <td>@osoba.Prezime</td>
+                    <td>@osoba.RadnoMesto</td>
+                    @if (User.IsInRole("Admin"))
+
+                    {
+
+                        <td>@Html.ActionLink("Izbrisi", "izbrisiOsobu", "KontaktOsoba", new { id = osoba.Id }, new { @class = "btn btn-primary btn-danger", onclick = "return confirm('Da li ste sigurni da želite da obrišete izabrani zapis?');" })</td>
+
+                    }
+                    
+            </tr>
+        }
+
+    </tbody>
+</table>
+@if (User.IsInRole("Editor") || User.IsInRole("Admin"))
+
+{
+
+    <p><a class="btn btn-default" @Html.ActionLink("Nova Kontakt Osoba", "NovaKontaktOsoba")></a></p>
+
+}
