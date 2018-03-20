@@ -47,19 +47,38 @@ namespace ProjektniCentar1.Controllers
         [HttpPost]
         public ActionResult PreduzeceCreate(Preduzece preduzece)
         {
-            
+
             if (preduzece.Id == 0)
             {
-                _context.Preduzeca.Add(preduzece);
+                ModelState.Remove("Id");
+
+                if (ModelState.IsValid)
+                {
+                    _context.Preduzeca.Add(preduzece);
+                }
+                else
+                {
+
+                    return View("NovoPreduzece");
+                }
             }
+
             else
             {
-                var preduzeceBaza = _context.Preduzeca.Single(p => p.Id == preduzece.Id);
-                 TryUpdateModel(preduzeceBaza);
+                if (ModelState.IsValid)
+                {
+                    var preduzeceBaza = _context.Preduzeca.Single(p => p.Id == preduzece.Id);
+                    TryUpdateModel(preduzeceBaza);
+                }
+                else
+                {
+
+                    return View("NovoPreduzece");
+                }
 
             }
-            _context.SaveChanges();
-             return RedirectToAction("Index", "Preduzece");
+                _context.SaveChanges();
+            return RedirectToAction("Index", "Preduzece");
         }
         [Authorize(Roles = "Admin , Editor")]
         public ActionResult Edit(int id)

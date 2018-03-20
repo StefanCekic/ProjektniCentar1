@@ -81,28 +81,56 @@ namespace ProjektniCentar1.Controllers
         [HttpPost]
         public ActionResult KontaktOsobaCreate(NovaOsobaViewModel novaOsoba)
         {
-     
-            if (novaOsoba.KontaktOsoba.Id == 0)
-            {
-                _context.KontaktOsobe.Add(novaOsoba.KontaktOsoba);
-                _context.ListaMailAdresa.Add(novaOsoba.ListaMailAdresa);
-                _context.ListaTelefona.Add(novaOsoba.ListaTelefona);
-            }
-            else
-            {
-                var model = new ViewModels.NovaOsobaViewModel();
+            
+            
+                if (novaOsoba.KontaktOsoba.Id == 0)
+                {
+                    ModelState.Remove("KontaktOsoba.Id");
+                    if (ModelState.IsValid)
+                    {
+                        _context.KontaktOsobe.Add(novaOsoba.KontaktOsoba);
+                        _context.ListaMailAdresa.Add(novaOsoba.ListaMailAdresa);
+                        _context.ListaTelefona.Add(novaOsoba.ListaTelefona);
+                    }
+                    else
+                    {
+                        NovaOsobaViewModel podaci = new NovaOsobaViewModel();
 
-                model.KontaktOsoba= _context.KontaktOsobe.Single(o => o.Id == novaOsoba.KontaktOsoba.Id);
-                model.ListaMailAdresa = _context.ListaMailAdresa.SingleOrDefault(o => o.KontaktOsobaId == novaOsoba.KontaktOsoba.Id);
-                model.ListaTelefona = _context.ListaTelefona.SingleOrDefault(p => p.KontaktOsobaId == novaOsoba.KontaktOsoba.Id);
-               
-                TryUpdateModel(model);
+                        podaci.Preduzeca = _context.Preduzeca.ToList();
+                        podaci.OznakeMaila = _context.OznakaMailAdresa.ToList();
+                        podaci.OznakeTelefona = _context.OznakaTelefona.ToList();
 
-            }
-            _context.SaveChanges();
+                        return View("NovaKontaktOsoba", podaci);
+                    }
 
-            return RedirectToAction("Index", "KontaktOsoba");
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                     var model = new ViewModels.NovaOsobaViewModel();
 
+                        model.KontaktOsoba = _context.KontaktOsobe.Single(o => o.Id == novaOsoba.KontaktOsoba.Id);
+                        model.ListaMailAdresa = _context.ListaMailAdresa.FirstOrDefault(o => o.KontaktOsobaId == novaOsoba.KontaktOsoba.Id);
+                        model.ListaTelefona = _context.ListaTelefona.FirstOrDefault(p => p.KontaktOsobaId == novaOsoba.KontaktOsoba.Id);
+
+                        TryUpdateModel(model);
+                    }
+                    else
+                    {
+                         NovaOsobaViewModel podaci = new NovaOsobaViewModel();
+
+                         podaci.Preduzeca = _context.Preduzeca.ToList();
+                         podaci.OznakeMaila = _context.OznakaMailAdresa.ToList();
+                         podaci.OznakeTelefona = _context.OznakaTelefona.ToList();
+
+                         return View("NovaKontaktOsoba", podaci);
+                    }
+
+                }
+                _context.SaveChanges();
+
+                return RedirectToAction("Index", "KontaktOsoba");
             
         }
         [Authorize(Roles = "Admin , Editor")]

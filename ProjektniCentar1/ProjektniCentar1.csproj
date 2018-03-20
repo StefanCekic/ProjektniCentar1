@@ -227,6 +227,22 @@
     <Compile Include="Migrations\201803161822379_seedUsers.Designer.cs">
       <DependentUpon>201803161822379_seedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803192008149_AnnotationsAdd.cs" />
+    <Compile Include="Migrations\201803192008149_AnnotationsAdd.Designer.cs">
+      <DependentUpon>201803192008149_AnnotationsAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803192112148_AnnotationsAdd1.cs" />
+    <Compile Include="Migrations\201803192112148_AnnotationsAdd1.Designer.cs">
+      <DependentUpon>201803192112148_AnnotationsAdd1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803192313287_RegexValidation.cs" />
+    <Compile Include="Migrations\201803192313287_RegexValidation.Designer.cs">
+      <DependentUpon>201803192313287_RegexValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803202249056_LastMigration.cs" />
+    <Compile Include="Migrations\201803202249056_LastMigration.Designer.cs">
+      <DependentUpon>201803202249056_LastMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -339,6 +355,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803161822379_seedUsers.resx">
       <DependentUpon>201803161822379_seedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803192008149_AnnotationsAdd.resx">
+      <DependentUpon>201803192008149_AnnotationsAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803192112148_AnnotationsAdd1.resx">
+      <DependentUpon>201803192112148_AnnotationsAdd1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803192313287_RegexValidation.resx">
+      <DependentUpon>201803192313287_RegexValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803202249056_LastMigration.resx">
+      <DependentUpon>201803202249056_LastMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
